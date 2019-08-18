@@ -1,8 +1,13 @@
 import sys
+from glob import glob
+from langdetect import detect
+import re
+
 class Cesar:
-    def __init__(self, fileAlfa):
+    def __init__(self, fileAlfa, master):
         self.__alfa = self.getAlfa(fileAlfa)
-    
+        self.__master = bool(master) #Boolean indicate the master mode
+
     def readFile(self, fileName):
         with open(fileName, "r+") as f:
             fileString = f.read()
@@ -36,12 +41,29 @@ class Cesar:
                     msg = msg + self.newChar(c, alfaLen, i)
             self.save_file(msg, i)
             msg = ""
+        if self.__master:
+            keys = []
+            languages = ["pt"]#, "en", "es", "fr", "ru", "it"]
+            files = glob("./results/*.txt")
+            for file_ in files:
+                textString = self.readFile(file_)
+                lan = detect(textString)
+                if lan in languages:
+                    keys.append(re.sub('[^0-9]', '', file_))
+            print("possible keys: ")
+            print(keys)
         print("Finish!")
 
 def main():
-    fileAlfa = sys.argv[1]
-    fileCifra = sys.argv[2]
-    cesar = Cesar(fileAlfa) 
+    try:
+        fileAlfa = sys.argv[1]
+        fileCifra = sys.argv[2]
+    except:
+        print("You must provide the alphabet and ciphertext")
+    
+    masterMode = input("Put the program mode: 0 - Normal Mode | 1 - Master Mode \n")
+
+    cesar = Cesar(fileAlfa, int(masterMode)) 
     cesar.tryAnalysis(fileCifra)
 
 if __name__ == '__main__':
