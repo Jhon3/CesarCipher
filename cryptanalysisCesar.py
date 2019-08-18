@@ -33,10 +33,8 @@ class Cesar:
         msg = ""
         for i in range(1, alfaLen+1):
             for c in cifra:
-                if (c not in self.__alfa) and (c is not "\n"):
+                if (c not in self.__alfa):
                     msg = msg + c 
-                elif c == "\n":
-                    msg = msg+"\n"
                 else:
                     msg = msg + self.newChar(c, alfaLen, i)
             self.save_file(msg, i)
