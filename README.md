@@ -13,5 +13,5 @@ Note that you have passed the alphabet used and the ciphertext, the program will
 
 ## Modes
 The program has two modules, the first is the normal one, where at the end of the execution the user will need to check in the worst case all the output files. The second mode is master, in which the program makes use of *langdetect*, a lib that uses natural language processing. With it, all the result files are analyzed and at the end the program indicates the possible keys to break the cipher.
-To install the langdetect just run:
+To install the *langdetect* just run:
 > pip3 install langdetect
