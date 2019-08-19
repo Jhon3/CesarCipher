@@ -50,7 +50,7 @@ class Cesar:
                     keys.append(re.sub('[^0-9]', '', file_))
             print("possible keys: ")
             print(keys)
-        print("Finish!")
+        print("Finished!")
 
 def main():
     try:
